@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NauHelper.Infrastructure", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterfaces", "UserInterfaces", "{5BC638E7-E826-4E22-866D-DC22DCB71528}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInterfaces.Student", "NauHelper.UserInterfaces.CommonUser\UserInterfaces.Student.csproj", "{1FBB942C-42D5-4E15-9B2F-6FAD57A35724}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInterfaces.CommonUser", "NauHelper.UserInterfaces.CommonUser\UserInterfaces.CommonUser.csproj", "{1FBB942C-42D5-4E15-9B2F-6FAD57A35724}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

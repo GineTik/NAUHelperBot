@@ -8,12 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
     <PackageReference Include="Telegramper" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NauHelper.UserInterfaces.CommonUser\UserInterfaces.Student.csproj" />
+    <ProjectReference Include="..\NauHelper.UserInterfaces.CommonUser\UserInterfaces.CommonUser.csproj" />
   </ItemGroup>
 
 </Project>
