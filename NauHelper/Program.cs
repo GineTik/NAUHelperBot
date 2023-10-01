@@ -1,4 +1,7 @@
-﻿using Telegram.Bot.Types.Enums;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NauHelper.Core.Localization;
+using NauHelper.Infrastructure.Localization;
+using Telegram.Bot.Types.Enums;
 using Telegramper.Core;
 using Telegramper.Core.Configuration.ReceiverOption;
 using Telegramper.Executors.Initialization.Services;
@@ -20,6 +23,7 @@ namespace NauHelper.Startup
                     options.ParameterParser.ErrorMessages.TypeParseError = "Некоректні дані";
                 }
             );
+            builder.Services.AddSingleton<ILocalizer, ResourceLocalizer>();
 
             var app = builder.Build();
             app.UseExecutors();
