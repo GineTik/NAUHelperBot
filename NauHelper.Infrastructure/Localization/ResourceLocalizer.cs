@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using NauHelper.Core.Interfaces.Localization;
+﻿using NauHelper.Core.Interfaces.Localization;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Services.Localization;
 using System.Resources;
@@ -22,8 +21,13 @@ namespace NauHelper.Infrastructure.Localization
 
         public async Task<string> GetAsync(string key, params string[] args)
         {
+            return await GetForUserAsync(key, _updateContext.TelegramUserId!.Value, args);
+        }
+
+        public async Task<string> GetForUserAsync(string key, long userId, params string[] args)
+        {
             var language = await _settingRepository.GetValueByKeyAsync(
-                _updateContext.TelegramUserId!.Value,
+                userId,
                 LocalizationService.LANGUAGE_KEY
             );
 

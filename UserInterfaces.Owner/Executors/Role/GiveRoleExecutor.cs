@@ -69,10 +69,10 @@ namespace UserInterfaces.Owner.Executors.Role
 
             var requestMessage = await Client.SendTextMessageAsync(
                 userId,
-                await _localizer.GetAsync("WantTakeRole", roleName.ToString()),
+                await _localizer.GetForUserAsync("WantTakeRole", userId, roleName.ToString()),
                 replyMarkup: new InlineKeyboardBuilder()
                     .CallbackButton(
-                        await _localizer.GetAsync("Accept"),
+                        await _localizer.GetForUserAsync("Accept", userId),
                         $"{nameof(UserAcceptRole)} {roleId} {UpdateContext.TelegramUserId}"
                     )
                     .Build()
