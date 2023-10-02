@@ -31,10 +31,5 @@ namespace NauHelper.Core.Services.Localization
 
             return true;
         }
-
-        public Task GetLanguageAsync(long userId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
