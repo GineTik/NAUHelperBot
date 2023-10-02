@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterfaces", "UserInter
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInterfaces.CommonUser", "NauHelper.UserInterfaces.CommonUser\UserInterfaces.CommonUser.csproj", "{1FBB942C-42D5-4E15-9B2F-6FAD57A35724}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterfaces.Owner", "UserInterfaces.Owner\UserInterfaces.Owner.csproj", "{84DFBAE9-4500-4625-B888-6A0674957656}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +37,17 @@ Global
 		{1FBB942C-42D5-4E15-9B2F-6FAD57A35724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FBB942C-42D5-4E15-9B2F-6FAD57A35724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FBB942C-42D5-4E15-9B2F-6FAD57A35724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84DFBAE9-4500-4625-B888-6A0674957656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84DFBAE9-4500-4625-B888-6A0674957656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84DFBAE9-4500-4625-B888-6A0674957656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84DFBAE9-4500-4625-B888-6A0674957656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1FBB942C-42D5-4E15-9B2F-6FAD57A35724} = {5BC638E7-E826-4E22-866D-DC22DCB71528}
+		{84DFBAE9-4500-4625-B888-6A0674957656} = {5BC638E7-E826-4E22-866D-DC22DCB71528}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77FF35F5-FEF9-4FE3-867B-856D714AD0A8}

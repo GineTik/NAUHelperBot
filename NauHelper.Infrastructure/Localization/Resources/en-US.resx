@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Change language</value>
   </data>
@@ -126,6 +129,10 @@
   <data name="ChangeLanguageIsSuccess" xml:space="preserve">
     <value>Language changed successfully</value>
   </data>
+  <data name="RoleAccepted" xml:space="preserve">
+    <value>🎉🎉🎉Congratulations you have confirmed the role of {0}🎉🎉🎉
+\nTo learn about new commands ↪️ /help</value>
+  </data>
   <data name="SelectLanguage" xml:space="preserve">
     <value>Select a language</value>
   </data>
@@ -134,5 +141,8 @@
   </data>
   <data name="Start" xml:space="preserve">
     <value>Hello✋\n\n😋 This bot will help you organize your studies and make them easier and faster. \n\nWhat does this bot do? ↪ /help\nIf you want to change settigns ↪ /settings</value>
+  </data>
+  <data name="WantTakeRole" xml:space="preserve">
+    <value>🙌You can get the role: {0}\nIf you do not want to accept this role, ignore this message.</value>
   </data>
 </root>

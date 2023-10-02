@@ -6,7 +6,9 @@ namespace NauHelper.Startup
     {
         public static IEnumerable<Assembly> Assemblies => new[]
         {
-            Assembly.Load("UserInterfaces.CommonUser")
+            // need add link on the project
+            Assembly.Load("UserInterfaces.CommonUser"),
+            Assembly.Load("UserInterfaces.Owner")
         };
     }
 }

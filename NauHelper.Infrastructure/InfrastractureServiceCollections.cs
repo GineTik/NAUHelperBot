@@ -13,6 +13,7 @@ namespace NauHelper.Infrastructure
         {
             services.AddDbContext<DataContext>(DataContextFactory.ConfigureOptions);
             services.AddTransient<ISettingRepository, SettingRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddSingleton<IAvailibleLanguages, AvailibleLanguages>();
             services.AddScoped<ILocalizer, ResourceLocalizer>();
             return services;

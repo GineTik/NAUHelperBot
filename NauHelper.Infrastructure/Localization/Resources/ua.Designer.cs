@@ -61,6 +61,15 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Прийняти.
+        /// </summary>
+        public static string Accept {
+            get {
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Змінити мову.
         /// </summary>
         public static string ChangeLanguage {
@@ -88,6 +97,16 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на 🎉🎉🎉Вітаю ви підтвердили отримання ролі {0}🎉🎉🎉\n
+        ///Щоб дізнатись про нові комманди ↪️ /help.
+        /// </summary>
+        public static string RoleAccepted {
+            get {
+                return ResourceManager.GetString("RoleAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Виберіть мову.
         /// </summary>
         public static string SelectLanguage {
@@ -111,6 +130,15 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 🙌Вам хочуть надати роль: {0}\nЯкщо ви не бажаєте прийняти роль, ігноруйте це повідомлення..
+        /// </summary>
+        public static string WantTakeRole {
+            get {
+                return ResourceManager.GetString("WantTakeRole", resourceCulture);
             }
         }
     }
