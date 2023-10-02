@@ -61,7 +61,52 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Hello.
+        ///   Ищет локализованную строку, похожую на Change language.
+        /// </summary>
+        public static string ChangeLanguage {
+            get {
+                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ❌Error! Availible languages: {0}.
+        /// </summary>
+        public static string ChangeLanguageIsFailed {
+            get {
+                return ResourceManager.GetString("ChangeLanguageIsFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Language changed successfully.
+        /// </summary>
+        public static string ChangeLanguageIsSuccess {
+            get {
+                return ResourceManager.GetString("ChangeLanguageIsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Select a language.
+        /// </summary>
+        public static string SelectLanguage {
+            get {
+                return ResourceManager.GetString("SelectLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ⚙️ Settings.
+        /// </summary>
+        public static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Hello✋\n\n😋 This bot will help you organize your studies and make them easier and faster. \n\nWhat does this bot do? ↪ /help\nIf you want to change settigns ↪ /settings.
         /// </summary>
         public static string Start {
             get {

@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="ChangeLanguageIsFailed" xml:space="preserve">
+    <value>❌Error! Availible languages: {0}</value>
+  </data>
+  <data name="ChangeLanguageIsSuccess" xml:space="preserve">
+    <value>Language changed successfully</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Select a language</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>⚙️ Settings</value>
+  </data>
   <data name="Start" xml:space="preserve">
-    <value>Hello</value>
+    <value>Hello✋\n\n😋 This bot will help you organize your studies and make them easier and faster. \n\nWhat does this bot do? ↪ /help\nIf you want to change settigns ↪ /settings</value>
   </data>
 </root>

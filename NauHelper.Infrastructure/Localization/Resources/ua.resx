@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Змінити мову</value>
+  </data>
+  <data name="ChangeLanguageIsFailed" xml:space="preserve">
+    <value>❌Помилка!\nДоступні мови: {0}</value>
+  </data>
+  <data name="ChangeLanguageIsSuccess" xml:space="preserve">
+    <value>Мова змінена успішно</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Виберіть мову</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>⚙️ Налаштування</value>
+  </data>
   <data name="Start" xml:space="preserve">
-    <value>Привіт</value>
+    <value>Привіт✋\n\n😋 Це бот, який допоможе тобі організовувати своє навчання легче та швидше.\n\nЩоб взнати, що цей бот може ↪ /help\nЩоб змінити налаштування ↪ /settings</value>
   </data>
 </root>

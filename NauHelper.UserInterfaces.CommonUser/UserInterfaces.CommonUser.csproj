@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NauHelper.Core\NauHelper.Core.csproj" />
+    <ProjectReference Include="..\NauHelper.Infrastructure\NauHelper.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,31 +1,36 @@
-﻿using Microsoft.Extensions.Configuration;
-using NauHelper.Core.Localization;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using NauHelper.Core.Interfaces.Localization;
+using NauHelper.Core.Interfaces.Repositories;
+using NauHelper.Core.Services.Localization;
 using System.Resources;
+using Telegramper.Core.Context;
 
 namespace NauHelper.Infrastructure.Localization
 {
     public class ResourceLocalizer : ILocalizer
     {
-        private const string LANGUAGE_KEY = "Language";
+        private readonly UpdateContext _updateContext;
+        private readonly ISettingRepository _settingRepository;
 
-        private readonly IConfiguration _configuration;
-
-        public ResourceLocalizer(IConfiguration configuration)
+        public ResourceLocalizer(
+            UpdateContextAccessor updateContextAccessor,
+            ISettingRepository settingRepository)
         {
-            _configuration = configuration;
+            _updateContext = updateContextAccessor.UpdateContext;
+            _settingRepository = settingRepository;
         }
 
-        public string Get(string key)
+        public async Task<string> GetAsync(string key, params string[] args)
         {
-            var language = _configuration[LANGUAGE_KEY];
-            if (language == null)
-            {
-                throw new InvalidOperationException("Language is null in the configuration file");
-            }
-            return Get(key, language!);
+            var language = await _settingRepository.GetValueByKeyAsync(
+                _updateContext.TelegramUserId!.Value,
+                LocalizationService.LANGUAGE_KEY
+            );
+
+            return await GetByLanguageAsync(key, language!, args);
         }
 
-        public string Get(string key, string language)
+        public async Task<string> GetByLanguageAsync(string key, string language, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(key);
             ArgumentNullException.ThrowIfNull(language);
@@ -34,8 +39,15 @@ namespace NauHelper.Infrastructure.Localization
                 $"NauHelper.Infrastructure.Localization.Resources.{language}",
                 typeof(ResourceLocalizer).Assembly
             );
-            return resourceManager.GetString(key)
+            var translatedText = resourceManager.GetString(key)
                 ?? throw new InvalidOperationException($"Key {key} is not exist");
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                translatedText = translatedText.Replace("{" + i + "}", args[i]);
+            }
+
+            return await Task.FromResult(translatedText.Replace("\\n", "\n"));
         }
     }
 }

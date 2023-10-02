@@ -61,7 +61,52 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Привіт.
+        ///   Ищет локализованную строку, похожую на Змінити мову.
+        /// </summary>
+        public static string ChangeLanguage {
+            get {
+                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ❌Помилка!\nДоступні мови: {0}.
+        /// </summary>
+        public static string ChangeLanguageIsFailed {
+            get {
+                return ResourceManager.GetString("ChangeLanguageIsFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Мова змінена успішно.
+        /// </summary>
+        public static string ChangeLanguageIsSuccess {
+            get {
+                return ResourceManager.GetString("ChangeLanguageIsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виберіть мову.
+        /// </summary>
+        public static string SelectLanguage {
+            get {
+                return ResourceManager.GetString("SelectLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ⚙️ Налаштування.
+        /// </summary>
+        public static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Привіт✋\n\n😋 Це бот, який допоможе тобі організовувати своє навчання легче та швидше.\n\nЩоб взнати, що цей бот може ↪ /help\nЩоб змінити налаштування ↪ /settings.
         /// </summary>
         public static string Start {
             get {
