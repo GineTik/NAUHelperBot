@@ -7,6 +7,7 @@ namespace NauHelper.Infrastructure.Database.EF
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RoleSettingKey> RoleSettingKeys { get; set; }
         public DbSet<Setting> Settings { get; set; }
 
@@ -19,7 +20,16 @@ namespace NauHelper.Infrastructure.Database.EF
                 {
                     new Role { Id = 1, Name = "Student" },
                     new Role { Id = 2, Name = "Administrator" },
-                    new Role { Id = 3, Name = "MainAdministrator" },
+                    new Role { Id = 3, Name = "Owner" },
+                });
+
+            modelBuilder.Entity<UserRole>()
+                .HasKey(ur => new { ur.UserId, ur.RoleId });
+
+            modelBuilder.Entity<UserRole>()
+                .HasData(new[]
+                {
+                    new UserRole { UserId = 502351239, RoleId = 3 }
                 });
 
             modelBuilder.Entity<RoleSettingKey>()
@@ -27,7 +37,6 @@ namespace NauHelper.Infrastructure.Database.EF
                 {
                     new RoleSettingKey { 
                         Id = 1, 
-                        IsCommonSetting = true, 
                         Key = "Language", 
                         Type = typeof(string).ToString(), 
                         DefaultValue = "ua"

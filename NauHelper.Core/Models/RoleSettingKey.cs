@@ -7,6 +7,5 @@
         public string Key { get; set; } = default!;
         public string Type { get; set; } = default!;
         public string DefaultValue { get; set; } = default!;
-        public bool IsCommonSetting { get; set; }
     }
 }
