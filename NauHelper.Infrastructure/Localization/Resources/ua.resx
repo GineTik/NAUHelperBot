@@ -129,18 +129,42 @@
   <data name="ChangeLanguageIsSuccess" xml:space="preserve">
     <value>Мова змінена успішно</value>
   </data>
+  <data name="GoStartRegistration" xml:space="preserve">
+    <value>Почати</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>/settings - налаштування взаємодії з ботом\n</value>
+  </data>
+  <data name="Re-registration" xml:space="preserve">
+    <value>Перереєструватись</value>
+  </data>
+  <data name="RegistrationIsEnded" xml:space="preserve">
+    <value>🎉🎉🎉 Дякую за реєстрацію\n\n❗Ви можете змінити свій вибір в налаштуваннях</value>
+  </data>
   <data name="RoleAccepted" xml:space="preserve">
     <value>🎉🎉🎉Вітаю ви підтвердили отримання ролі {0}🎉🎉🎉\n
 Щоб дізнатись про нові комманди ↪️ /help</value>
   </data>
+  <data name="SelectFaculty" xml:space="preserve">
+    <value>Виберіть ваш факультет</value>
+  </data>
+  <data name="SelectGroup" xml:space="preserve">
+    <value>Виберіть вашу групу</value>
+  </data>
   <data name="SelectLanguage" xml:space="preserve">
     <value>Виберіть мову</value>
+  </data>
+  <data name="SelectSpecialty" xml:space="preserve">
+    <value>Виберіть вашу спеціальність</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>⚙️ Налаштування</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Привіт✋\n\n😋 Це бот, який допоможе тобі організовувати своє навчання легче та швидше.\n\nЩоб взнати, що цей бот може ↪ /help\nЩоб змінити налаштування ↪ /settings</value>
+    <value>Привіт✋\n\n😋 Це бот, який допоможе тобі організовувати своє навчання легче та швидше.\n\nЩоб взнати, що цей бот може ↪ /help\nЩоб змінити налаштування ↪ /settings\n\nДля початку тобі потрібно зареєструватися, щоб це зробити нажми на кнопку нижче. ❗ Реєструйтесь тільки в тому випадку, якщо ви студент.</value>
+  </data>
+  <data name="StudentSettingsDatas" xml:space="preserve">
+    <value>Факультет: {0}\nСпеціальність: {1}\nГрупа: {2}</value>
   </data>
   <data name="WantTakeRole" xml:space="preserve">
     <value>🙌Вам хочуть надати роль: {0}\nЯкщо ви не бажаєте прийняти роль, ігноруйте це повідомлення.</value>

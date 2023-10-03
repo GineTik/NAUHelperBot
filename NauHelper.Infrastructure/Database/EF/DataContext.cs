@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NauHelper.Core.Models;
+using NauHelper.Core.Entities;
+using NauHelper.Core.Enums;
 
 namespace NauHelper.Infrastructure.Database.EF
 {
@@ -10,6 +11,9 @@ namespace NauHelper.Infrastructure.Database.EF
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RoleSettingKey> RoleSettingKeys { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
@@ -18,9 +22,9 @@ namespace NauHelper.Infrastructure.Database.EF
             modelBuilder.Entity<Role>()
                 .HasData(new[]
                 {
-                    new Role { Id = 1, Name = "Student" },
-                    new Role { Id = 2, Name = "Administrator" },
-                    new Role { Id = 3, Name = "Owner" },
+                    new Role { Id = (int)ExistingRoles.Student, Name = "Student" },
+                    new Role { Id = (int)ExistingRoles.Administrator, Name = "Administrator" },
+                    new Role { Id = (int)ExistingRoles.Owner, Name = "Owner" },
                 });
 
             modelBuilder.Entity<UserRole>()
@@ -37,9 +41,30 @@ namespace NauHelper.Infrastructure.Database.EF
                 {
                     new RoleSettingKey { 
                         Id = 1, 
-                        Key = "Language", 
+                        Key = SettingKeys.Language, 
                         Type = typeof(string).ToString(), 
                         DefaultValue = "ua"
+                    },
+                    new RoleSettingKey {
+                        Id = 2,
+                        RoleId = (int)ExistingRoles.Student,
+                        Key = SettingKeys.FacultyId,
+                        Type = typeof(int).ToString(),
+                        DefaultValue = ""
+                    },
+                    new RoleSettingKey {
+                        Id = 3,
+                        RoleId = (int)ExistingRoles.Student,
+                        Key = SettingKeys.GroupId,
+                        Type = typeof(int).ToString(),
+                        DefaultValue = ""
+                    },
+                    new RoleSettingKey {
+                        Id = 4,
+                        RoleId = (int)ExistingRoles.Student,
+                        Key = SettingKeys.SpecialtyId,
+                        Type = typeof(int).ToString(),
+                        DefaultValue = ""
                     },
                 });
 

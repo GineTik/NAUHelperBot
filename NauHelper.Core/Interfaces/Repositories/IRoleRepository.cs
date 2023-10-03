@@ -1,4 +1,4 @@
-﻿using NauHelper.Core.Models;
+﻿using NauHelper.Core.Entities;
 
 namespace NauHelper.Core.Interfaces.Repositories
 {

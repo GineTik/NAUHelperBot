@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NauHelper.Core.Entities;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Models;
 using NauHelper.Infrastructure.Database.EF;
@@ -19,7 +20,7 @@ namespace NauHelper.Infrastructure.Database.Repositories
         public async Task<string> GetValueByKeyAsync(long userId, string key)
         {
             var settingKey = await _dataContext.RoleSettingKeys.FirstOrDefaultAsync(
-                settingKey => settingKey.Key == "Language"
+                settingKey => settingKey.Key == key
             );
 
             var settingValue = await _dataContext.Settings.FirstOrDefaultAsync(setting =>

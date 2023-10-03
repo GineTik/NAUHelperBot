@@ -1,13 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using NauHelper.Core;
-using NauHelper.Core.Interfaces.Localization;
-using NauHelper.Core.Interfaces.Repositories;
-using NauHelper.Core.Services.Localization;
+﻿using NauHelper.Core;
 using NauHelper.Infrastructure;
-using NauHelper.Infrastructure.Database.EF;
-using NauHelper.Infrastructure.Database.Repositories;
-using NauHelper.Infrastructure.Localization;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using Telegramper.Core;

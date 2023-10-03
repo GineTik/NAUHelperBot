@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NauHelper.Infrastructure.Database.EF;
 
@@ -11,9 +12,11 @@ using NauHelper.Infrastructure.Database.EF;
 namespace NauHelper.Infrastructure.Database.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231002165809_Add faculty and group")]
+    partial class Addfacultyandgroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,12 +50,12 @@ namespace NauHelper.Infrastructure.Database.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SpecialtyId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -143,14 +146,6 @@ namespace NauHelper.Infrastructure.Database.EF.Migrations
                             Key = "Group",
                             RoleId = 1,
                             Type = "System.Int32"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DefaultValue = "",
-                            Key = "Specialty",
-                            RoleId = 1,
-                            Type = "System.Int32"
                         });
                 });
 
@@ -175,23 +170,6 @@ namespace NauHelper.Infrastructure.Database.EF.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Settings");
-                });
-
-            modelBuilder.Entity("NauHelper.Core.Models.Specialty", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FacultyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Specialties");
                 });
 
             modelBuilder.Entity("NauHelper.Core.Models.User", b =>

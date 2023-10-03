@@ -1,6 +1,6 @@
 ﻿using NauHelper.Core.Interfaces.Localization;
 using NauHelper.Core.Interfaces.Repositories;
-using NauHelper.Core.Services.Localization;
+using NauHelper.Core.Services;
 using System.Resources;
 using Telegramper.Core.Context;
 

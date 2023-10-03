@@ -1,6 +1,6 @@
-﻿namespace NauHelper.Core.Models
+﻿namespace NauHelper.Core.Entities
 {
-    public class Role
+    public class Faculty
     {
         public int Id { get; set; }
         public string Name { get; set; } = default!;

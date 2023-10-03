@@ -1,7 +1,8 @@
 ﻿using NauHelper.Core.Interfaces.Localization;
 using NauHelper.Core.Interfaces.Repositories;
+using NauHelper.Core.Interfaces.Services;
 
-namespace NauHelper.Core.Services.Localization
+namespace NauHelper.Core.Services
 {
     public class LocalizationService : ILocalizationService
     {
@@ -30,6 +31,14 @@ namespace NauHelper.Core.Services.Localization
             );
 
             return true;
+        }
+
+        public async Task<string> GetActualLanguageAsync(long userId)
+        {
+            return await _settingRepository.GetValueByKeyAsync(
+                userId,
+                LANGUAGE_KEY
+            );
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NauHelper.Core.Models
+namespace NauHelper.Core.Entities
 {
     public class User
     {

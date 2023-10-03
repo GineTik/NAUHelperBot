@@ -129,18 +129,42 @@
   <data name="ChangeLanguageIsSuccess" xml:space="preserve">
     <value>Language changed successfully</value>
   </data>
+  <data name="GoStartRegistration" xml:space="preserve">
+    <value>Get started</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>/settings - setting up interaction with the bot\n</value>
+  </data>
+  <data name="Re-registration" xml:space="preserve">
+    <value>Re-register</value>
+  </data>
+  <data name="RegistrationIsEnded" xml:space="preserve">
+    <value>🎉🎉🎉 Thank you for registering\n\n❗You can change your choice in the settings</value>
+  </data>
   <data name="RoleAccepted" xml:space="preserve">
     <value>🎉🎉🎉Congratulations you have confirmed the role of {0}🎉🎉🎉
 \nTo learn about new commands ↪️ /help</value>
   </data>
+  <data name="SelectFaculty" xml:space="preserve">
+    <value>Select a faculty</value>
+  </data>
+  <data name="SelectGroup" xml:space="preserve">
+    <value>Select your group</value>
+  </data>
   <data name="SelectLanguage" xml:space="preserve">
     <value>Select a language</value>
+  </data>
+  <data name="SelectSpecialty" xml:space="preserve">
+    <value>Select your specialty</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>⚙️ Settings</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Hello✋\n\n😋 This bot will help you organize your studies and make them easier and faster. \n\nWhat does this bot do? ↪ /help\nIf you want to change settigns ↪ /settings</value>
+    <value>Hello✋\n\n😋 This bot will help you organize your studies and make them easier and faster. \n\nWhat does this bot do? ↪ /help\nIf you want to change settigns ↪ /settings\n\nTo get started, you need to register, click on the button below. ❗️ Register only if you are a student.</value>
+  </data>
+  <data name="StudentSettingsDatas" xml:space="preserve">
+    <value>Department: {0}\nSpecialty: {1}\nGroup: {2}</value>
   </data>
   <data name="WantTakeRole" xml:space="preserve">
     <value>🙌You can get the role: {0}\nIf you do not want to accept this role, ignore this message.</value>

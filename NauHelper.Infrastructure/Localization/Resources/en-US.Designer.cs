@@ -97,12 +97,66 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Get started.
+        /// </summary>
+        public static string GoStartRegistration {
+            get {
+                return ResourceManager.GetString("GoStartRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на /settings - setting up interaction with the bot\n.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Re-register.
+        /// </summary>
+        public static string Re_registration {
+            get {
+                return ResourceManager.GetString("Re-registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 🎉🎉🎉 Thank you for registering\n\n❗You can change your choice in the settings.
+        /// </summary>
+        public static string RegistrationIsEnded {
+            get {
+                return ResourceManager.GetString("RegistrationIsEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 🎉🎉🎉Congratulations you have confirmed the role of {0}🎉🎉🎉
         ///\nTo learn about new commands ↪️ /help.
         /// </summary>
         public static string RoleAccepted {
             get {
                 return ResourceManager.GetString("RoleAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Select a faculty.
+        /// </summary>
+        public static string SelectFaculty {
+            get {
+                return ResourceManager.GetString("SelectFaculty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Select your group.
+        /// </summary>
+        public static string SelectGroup {
+            get {
+                return ResourceManager.GetString("SelectGroup", resourceCulture);
             }
         }
         
@@ -116,6 +170,15 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Select your specialty.
+        /// </summary>
+        public static string SelectSpecialty {
+            get {
+                return ResourceManager.GetString("SelectSpecialty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ⚙️ Settings.
         /// </summary>
         public static string Setting {
@@ -125,11 +188,20 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Hello✋\n\n😋 This bot will help you organize your studies and make them easier and faster. \n\nWhat does this bot do? ↪ /help\nIf you want to change settigns ↪ /settings.
+        ///   Ищет локализованную строку, похожую на Hello✋\n\n😋 This bot will help you organize your studies and make them easier and faster. \n\nWhat does this bot do? ↪ /help\nIf you want to change settigns ↪ /settings\n\nTo get started, you need to register, click on the button below. ❗️ Register only if you are a student..
         /// </summary>
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Department: {0}\nSpecialty: {1}\nGroup: {2}.
+        /// </summary>
+        public static string StudentSettingsDatas {
+            get {
+                return ResourceManager.GetString("StudentSettingsDatas", resourceCulture);
             }
         }
         

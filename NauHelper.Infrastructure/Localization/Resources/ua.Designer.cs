@@ -97,12 +97,66 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Почати.
+        /// </summary>
+        public static string GoStartRegistration {
+            get {
+                return ResourceManager.GetString("GoStartRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на /settings - налаштування взаємодії з ботом\n.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Перереєструватись.
+        /// </summary>
+        public static string Re_registration {
+            get {
+                return ResourceManager.GetString("Re-registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 🎉🎉🎉 Дякую за реєстрацію\n\n❗Ви можете змінити свій вибір в налаштуваннях.
+        /// </summary>
+        public static string RegistrationIsEnded {
+            get {
+                return ResourceManager.GetString("RegistrationIsEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 🎉🎉🎉Вітаю ви підтвердили отримання ролі {0}🎉🎉🎉\n
         ///Щоб дізнатись про нові комманди ↪️ /help.
         /// </summary>
         public static string RoleAccepted {
             get {
                 return ResourceManager.GetString("RoleAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виберіть ваш факультет.
+        /// </summary>
+        public static string SelectFaculty {
+            get {
+                return ResourceManager.GetString("SelectFaculty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виберіть вашу групу.
+        /// </summary>
+        public static string SelectGroup {
+            get {
+                return ResourceManager.GetString("SelectGroup", resourceCulture);
             }
         }
         
@@ -116,6 +170,15 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Виберіть вашу спеціальність.
+        /// </summary>
+        public static string SelectSpecialty {
+            get {
+                return ResourceManager.GetString("SelectSpecialty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ⚙️ Налаштування.
         /// </summary>
         public static string Setting {
@@ -125,11 +188,20 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Привіт✋\n\n😋 Це бот, який допоможе тобі організовувати своє навчання легче та швидше.\n\nЩоб взнати, що цей бот може ↪ /help\nЩоб змінити налаштування ↪ /settings.
+        ///   Ищет локализованную строку, похожую на Привіт✋\n\n😋 Це бот, який допоможе тобі організовувати своє навчання легче та швидше.\n\nЩоб взнати, що цей бот може ↪ /help\nЩоб змінити налаштування ↪ /settings\n\nДля початку тобі потрібно зареєструватися, щоб це зробити нажми на кнопку нижче. ❗ Реєструйтесь тільки в тому випадку, якщо ви студент..
         /// </summary>
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Факультет: {0}\nСпеціальність: {1}\nГрупа: {2}.
+        /// </summary>
+        public static string StudentSettingsDatas {
+            get {
+                return ResourceManager.GetString("StudentSettingsDatas", resourceCulture);
             }
         }
         

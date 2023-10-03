@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NauHelper.Core.Entities;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Models;
 using NauHelper.Infrastructure.Database.EF;
@@ -26,7 +27,7 @@ namespace NauHelper.Infrastructure.Database.Repositories
 
             if (userRole != null) 
             {
-                throw new InvalidOperationException($"User(id:{userId}) already have this role({role.Name})");
+                return;
             }
 
             _dataContext.UserRoles.Add(new UserRole { UserId = userId, RoleId = roleId });
@@ -60,7 +61,12 @@ namespace NauHelper.Infrastructure.Database.Repositories
             var userRole = await _dataContext.UserRoles.FirstOrDefaultAsync(ur =>
                 ur.UserId == userId
                 && ur.RoleId == roleId
-            ) ?? throw new InvalidDataException($"User(id:{userId}) haven't this role(id:{roleId})");
+            );
+
+            if (userRole == null)
+            {
+                return;
+            }
 
             _dataContext.UserRoles.Remove(userRole);
             await _dataContext.SaveChangesAsync();

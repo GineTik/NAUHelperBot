@@ -1,4 +1,4 @@
-﻿namespace NauHelper.Core.Models
+﻿namespace NauHelper.Core.Entities
 {
     public class RoleSettingKey
     {
