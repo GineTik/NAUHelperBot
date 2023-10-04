@@ -19,6 +19,36 @@ namespace NauHelper.Infrastructure.Database.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserRole>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(ur => ur.UserId);
+
+            modelBuilder.Entity<UserRole>()
+                .HasOne<Role>()
+                .WithMany()
+                .HasForeignKey(ur => ur.RoleId);
+
+            modelBuilder.Entity<Setting>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(s => s.UserId);
+
+            modelBuilder.Entity<Setting>()
+                .HasOne<RoleSettingKey>()
+                .WithMany()
+                .HasForeignKey(s => s.RoleSettingKeyId);
+
+            modelBuilder.Entity<Specialty>()
+                .HasOne<Faculty>()
+                .WithMany()
+                .HasForeignKey(s => s.FacultyId);
+
+            modelBuilder.Entity<Group>()
+                .HasOne<Specialty>()
+                .WithMany()
+                .HasForeignKey(g => g.SpecialtyId);
+
             modelBuilder.Entity<Role>()
                 .HasData(new[]
                 {

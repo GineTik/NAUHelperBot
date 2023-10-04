@@ -8,7 +8,8 @@ namespace NauHelper.Startup
         {
             // need add link on the project
             Assembly.Load("UserInterfaces.CommonUser"),
-            Assembly.Load("UserInterfaces.Owner")
+            Assembly.Load("UserInterfaces.Owner"),
+            Assembly.Load("UserInterfaces.Administrator")
         };
     }
 }

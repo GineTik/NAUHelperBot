@@ -2,6 +2,7 @@
 using NauHelper.Core.Enums;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Interfaces.Services;
+using System.Runtime.InteropServices;
 
 namespace NauHelper.Core.Services
 {
@@ -38,6 +39,27 @@ namespace NauHelper.Core.Services
         public async Task AttachStudentRoleAsync(long userId)
         {
             await _roleRepository.AttachRoleAsync(userId, (int)ExistingRoles.Student);
+        }
+
+        public Task<IEnumerable<Role>> GetExistsRolesAsync()
+        {
+            return  _roleRepository.GetExistsRolesAsync();
+        }
+
+        public async Task<string> GetRoleNameByIdAsync(int roleId)
+        {
+            var name = ((ExistingRoles)roleId).ToString();
+            return await Task.FromResult(name);
+        }
+
+        public async Task RemoveAttachedRoleAsync(long plenipotentiaryUserId, long userId, int roleId)
+        {
+            if (await HaveRoleAsync(plenipotentiaryUserId, (int)ExistingRoles.Owner) == false)
+            {
+                throw new InvalidOperationException("User haven't owner role");
+            }
+
+            await _roleRepository.RemoveAttachedRoleAsync(userId, roleId);
         }
     }
 }

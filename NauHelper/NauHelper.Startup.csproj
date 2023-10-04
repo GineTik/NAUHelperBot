@@ -19,6 +19,7 @@
     <ProjectReference Include="..\NauHelper.Core\NauHelper.Core.csproj" />
     <ProjectReference Include="..\NauHelper.Infrastructure\NauHelper.Infrastructure.csproj" />
     <ProjectReference Include="..\NauHelper.UserInterfaces.CommonUser\UserInterfaces.CommonUser.csproj" />
+    <ProjectReference Include="..\UserInterfaces.Administrator\UserInterfaces.Administrator.csproj" />
     <ProjectReference Include="..\UserInterfaces.Owner\UserInterfaces.Owner.csproj" />
   </ItemGroup>
 

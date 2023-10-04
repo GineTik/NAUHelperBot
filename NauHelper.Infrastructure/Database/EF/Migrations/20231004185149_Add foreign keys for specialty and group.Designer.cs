@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NauHelper.Infrastructure.Database.EF;
 
@@ -11,9 +12,11 @@ using NauHelper.Infrastructure.Database.EF;
 namespace NauHelper.Infrastructure.Database.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231004185149_Add foreign keys for specialty and group")]
+    partial class Addforeignkeysforspecialtyandgroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,10 +179,6 @@ namespace NauHelper.Infrastructure.Database.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleSettingKeyId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("Settings");
                 });
 
@@ -222,8 +221,6 @@ namespace NauHelper.Infrastructure.Database.EF.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("UserRoles");
 
                     b.HasData(
@@ -243,41 +240,11 @@ namespace NauHelper.Infrastructure.Database.EF.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NauHelper.Core.Entities.Setting", b =>
-                {
-                    b.HasOne("NauHelper.Core.Entities.RoleSettingKey", null)
-                        .WithMany()
-                        .HasForeignKey("RoleSettingKeyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NauHelper.Core.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("NauHelper.Core.Entities.Specialty", b =>
                 {
                     b.HasOne("NauHelper.Core.Entities.Faculty", null)
                         .WithMany()
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("NauHelper.Core.Entities.UserRole", b =>
-                {
-                    b.HasOne("NauHelper.Core.Entities.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NauHelper.Core.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

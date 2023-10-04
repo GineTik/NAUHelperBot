@@ -1,5 +1,6 @@
 ﻿using NauHelper.Core.Enums;
 using NauHelper.Core.Interfaces.Repositories;
+using NauHelper.Core.Interfaces.Services;
 using Telegram.Bot;
 using Telegramper.Core.AdvancedBotClient.Extensions;
 using Telegramper.Core.Helpers.Builders;
@@ -14,12 +15,12 @@ namespace UserInterfaces.Owner.Executors.Role
     public class RemoveRoleExecutor : Executor
     {
         private readonly IDialogService _dialogService;
-        private readonly IRoleRepository _roleRepository;
+        private readonly IRoleService _roleService;
 
-        public RemoveRoleExecutor(IDialogService dialogService, IRoleRepository roleRepository)
+        public RemoveRoleExecutor(IDialogService dialogService, IRoleService roleService)
         {
             _dialogService = dialogService;
-            _roleRepository = roleRepository;
+            _roleService = roleService;
         }
 
         [TargetCommand(UserStates = "Dialog:RemoveRoleExecutor")]
@@ -39,7 +40,7 @@ namespace UserInterfaces.Owner.Executors.Role
         [RequireMessageNumber(ErrorMessage = "Ви маєте надати Id числом")]
         public async Task TakeUsername(long userId)
         {
-            var userRoles = await _roleRepository.GetUserRolesAsync(userId);
+            var userRoles = await _roleService.GetUserRolesAsync(userId);
 
             await Client.SendTextMessageAsync(
                 "Виберіть роль для видалення",
@@ -58,8 +59,8 @@ namespace UserInterfaces.Owner.Executors.Role
         [TargetCallbackData(UserStates = "Role:Owner")]
         public async Task RemoveRoleButton(long userId, int roleId)
         {
-            var roleName = (ExistingRoles)roleId;
-            await _roleRepository.RemoveAttachedRoleAsync(userId, roleId);
+            var roleName = _roleService.GetRoleNameByIdAsync(roleId);
+            await _roleService.RemoveAttachedRoleAsync(UpdateContext.TelegramUserId!.Value, userId, roleId);
             await Client.SendTextMessageAsync($"✅Роль {roleName} видалена.");
             await Client.DeleteMessageAsync();
         }

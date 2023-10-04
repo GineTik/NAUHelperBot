@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NauHelper.Core.Entities;
 using NauHelper.Core.Interfaces.Repositories;
-using NauHelper.Core.Models;
 using NauHelper.Infrastructure.Database.EF;
-using Telegramper.Core.Context;
 
 namespace NauHelper.Infrastructure.Database.Repositories
 {

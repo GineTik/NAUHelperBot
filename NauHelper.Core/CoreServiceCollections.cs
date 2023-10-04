@@ -8,9 +8,10 @@ namespace NauHelper.Core
     {
         public static IServiceCollection AddCore(this IServiceCollection services)
         {
-            services.AddSingleton<ILocalizationService, LocalizationService>();
-            services.AddSingleton<IStudentService, StudentService>();
-            services.AddSingleton<IRoleService, RoleService>();
+            services.AddScoped<ILocalizationService, LocalizationService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IStudentGroupCoordinationService, StudentGroupCoordinationService>();
             return services;
         }
     }
