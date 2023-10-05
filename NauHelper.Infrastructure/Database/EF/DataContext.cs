@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NauHelper.Core.Entities;
-using NauHelper.Core.Enums;
 
 namespace NauHelper.Infrastructure.Database.EF
 {
@@ -19,26 +18,6 @@ namespace NauHelper.Infrastructure.Database.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserRole>()
-                .HasOne<User>()
-                .WithMany()
-                .HasForeignKey(ur => ur.UserId);
-
-            modelBuilder.Entity<UserRole>()
-                .HasOne<Role>()
-                .WithMany()
-                .HasForeignKey(ur => ur.RoleId);
-
-            modelBuilder.Entity<Setting>()
-                .HasOne<User>()
-                .WithMany()
-                .HasForeignKey(s => s.UserId);
-
-            modelBuilder.Entity<Setting>()
-                .HasOne<RoleSettingKey>()
-                .WithMany()
-                .HasForeignKey(s => s.RoleSettingKeyId);
-
             modelBuilder.Entity<Specialty>()
                 .HasOne<Faculty>()
                 .WithMany()
@@ -49,54 +28,8 @@ namespace NauHelper.Infrastructure.Database.EF
                 .WithMany()
                 .HasForeignKey(g => g.SpecialtyId);
 
-            modelBuilder.Entity<Role>()
-                .HasData(new[]
-                {
-                    new Role { Id = (int)ExistingRoles.Student, Name = "Student" },
-                    new Role { Id = (int)ExistingRoles.Administrator, Name = "Administrator" },
-                    new Role { Id = (int)ExistingRoles.Owner, Name = "Owner" },
-                });
-
-            modelBuilder.Entity<UserRole>()
-                .HasKey(ur => new { ur.UserId, ur.RoleId });
-
-            modelBuilder.Entity<UserRole>()
-                .HasData(new[]
-                {
-                    new UserRole { UserId = 502351239, RoleId = 3 }
-                });
-
-            modelBuilder.Entity<RoleSettingKey>()
-                .HasData(new[]
-                {
-                    new RoleSettingKey { 
-                        Id = 1, 
-                        Key = SettingKeys.Language, 
-                        Type = typeof(string).ToString(), 
-                        DefaultValue = "ua"
-                    },
-                    new RoleSettingKey {
-                        Id = 2,
-                        RoleId = (int)ExistingRoles.Student,
-                        Key = SettingKeys.FacultyId,
-                        Type = typeof(int).ToString(),
-                        DefaultValue = ""
-                    },
-                    new RoleSettingKey {
-                        Id = 3,
-                        RoleId = (int)ExistingRoles.Student,
-                        Key = SettingKeys.GroupId,
-                        Type = typeof(int).ToString(),
-                        DefaultValue = ""
-                    },
-                    new RoleSettingKey {
-                        Id = 4,
-                        RoleId = (int)ExistingRoles.Student,
-                        Key = SettingKeys.SpecialtyId,
-                        Type = typeof(int).ToString(),
-                        DefaultValue = ""
-                    },
-                });
+            modelBuilder.AddUsersAndRoles();
+            modelBuilder.AddSettingKeys();
 
             base.OnModelCreating(modelBuilder);
         }
