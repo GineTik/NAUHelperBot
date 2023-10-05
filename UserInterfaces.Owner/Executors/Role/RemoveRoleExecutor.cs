@@ -1,4 +1,4 @@
-﻿using NauHelper.Core.Enums;
+﻿using NauHelper.Core.Constants;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Interfaces.Services;
 using Telegram.Bot;

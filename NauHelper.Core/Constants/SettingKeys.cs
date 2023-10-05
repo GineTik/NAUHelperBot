@@ -1,4 +1,4 @@
-﻿namespace NauHelper.Core.Enums
+﻿namespace NauHelper.Core.Constants
 {
     public static class SettingKeys
     {
