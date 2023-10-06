@@ -5,6 +5,6 @@ namespace NauHelper.Core.Interfaces.Services
     public interface IStudentService
     {
         Task<StudentInfo> GetStudentInfoAsync(long userId);
-        Task SetStudentInfoAsync(long userId, StudentRegistrationInfo info);
+        Task ApplyRegistrationAsync(long userId, int groupId);
     }
 }

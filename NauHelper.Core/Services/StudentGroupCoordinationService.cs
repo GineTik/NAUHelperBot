@@ -1,5 +1,5 @@
-﻿using NauHelper.Core.Entities;
-using NauHelper.Core.Constants;
+﻿using NauHelper.Core.Constants;
+using NauHelper.Core.Entities;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Interfaces.Services;
 
@@ -10,18 +10,24 @@ namespace NauHelper.Core.Services
         private readonly IFacultyRepository _facultyRepository;
         private readonly ISpecialtyRepository _specialtyRepository; 
         private readonly IGroupRepository _groupRepository;
-        private readonly IRoleService _roleService;
+        private readonly IUserService _roleService;
+        private readonly ISettingRepository _settingRepository;
+        private readonly IUserRepository _userRepository;
 
         public StudentGroupCoordinationService(
             IFacultyRepository facultyRepository,
             ISpecialtyRepository specialtyRepository,
             IGroupRepository groupRepository,
-            IRoleService roleService)
+            IUserService roleService,
+            ISettingRepository settingRepository,
+            IUserRepository userRepository)
         {
             _facultyRepository = facultyRepository;
             _specialtyRepository = specialtyRepository;
             _groupRepository = groupRepository;
             _roleService = roleService;
+            _settingRepository = settingRepository;
+            _userRepository = userRepository;
         }
 
         public async Task AddFacultyAsync(long plenipotentiaryUserId, string name)
@@ -97,6 +103,12 @@ namespace NauHelper.Core.Services
         {
             await throwIfWrongRole(plenipotentiaryUserId);
             await method(id);
+            // TODO: Remove student role of users who have removed faculty, spesialty or group
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByGroupIdAsync(int groupId)
+        {
+            return await _userRepository.GetUsersByGroupIdAsync(groupId);
         }
     }
 }

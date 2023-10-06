@@ -135,6 +135,9 @@
   <data name="Help" xml:space="preserve">
     <value>/settings - налаштування взаємодії з ботом\n</value>
   </data>
+  <data name="MyGroupIsMissing" xml:space="preserve">
+    <value>Немає моєї групи</value>
+  </data>
   <data name="Re-registration" xml:space="preserve">
     <value>Перереєструватись</value>
   </data>
@@ -156,6 +159,12 @@
   </data>
   <data name="SelectSpecialty" xml:space="preserve">
     <value>Виберіть вашу спеціальність</value>
+  </data>
+  <data name="SendRequestToCreateGroup" xml:space="preserve">
+    <value>Ви можете подати запрос на створення нової групи</value>
+  </data>
+  <data name="SendRequestToCreateGroupButton" xml:space="preserve">
+    <value>Створити нову групу</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>⚙️ Налаштування</value>

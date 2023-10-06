@@ -1,18 +1,19 @@
-﻿using NauHelper.Core.Entities;
-using NauHelper.Core.Constants;
+﻿using NauHelper.Core.Constants;
+using NauHelper.Core.Entities;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Interfaces.Services;
-using System.Runtime.InteropServices;
 
 namespace NauHelper.Core.Services
 {
-    public class RoleService : IRoleService
+    public class UserService : IUserService
     {
         private readonly IRoleRepository _roleRepository;
+        private readonly IUserRepository _userRepository;
 
-        public RoleService(IRoleRepository roleRepository)
+        public UserService(IRoleRepository roleRepository, IUserRepository userRepository)
         {
             _roleRepository = roleRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<Role>> GetUserRolesAsync(long userId)
@@ -60,6 +61,16 @@ namespace NauHelper.Core.Services
             }
 
             await _roleRepository.RemoveAttachedRoleAsync(userId, roleId);
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByRoleIdAsync(int roleId)
+        {
+            return await _userRepository.GetUsersByRoleIdAsync(roleId);
+        }
+
+        public async Task AttachGroupLeaderRoleAsync(long userId)
+        {
+            await _roleRepository.AttachRoleAsync(userId, (int)ExistingRoles.GroupLeader);
         }
     }
 }

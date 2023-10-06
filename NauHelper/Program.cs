@@ -40,6 +40,11 @@ namespace NauHelper.Startup
                 await updateContext.Client.SendTextMessageAsync(ex.Message);
                 Console.WriteLine(ex);
             });
+            app.UseCatchException<NullReferenceException>(async (updateContext, ex) =>
+            {
+                await updateContext.Client.SendTextMessageAsync(ex.Message);
+                Console.WriteLine(ex);
+            });
             app.UseMiddleware<RegistrationUserMiddleware>();
             app.UseMiddleware<AttachRoleMiddleware>();
             app.UseExecutors();

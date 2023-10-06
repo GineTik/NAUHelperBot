@@ -27,7 +27,8 @@ namespace UserInterfaces.Administrator.Executors.StudentGroupCoordination
             _dialogService = dialogService;
         }
 
-        protected async Task SelectItem<T>(IEnumerable<T> items, Func<T, string> name, Func<T, string> argsCallbackDatas, string callbackRemoveMethodName)
+        protected async Task SelectItem<T>(IEnumerable<T> items, Func<T, string> name, 
+            Func<T, string> argsCallbackDatas, string callbackRemoveMethodName)
         {
             await Client.SendTextMessageAsync(
                 "Зробіть вибір",

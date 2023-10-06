@@ -10,7 +10,7 @@ namespace NauHelper.Core
         {
             services.AddScoped<ILocalizationService, LocalizationService>();
             services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStudentGroupCoordinationService, StudentGroupCoordinationService>();
             return services;
         }

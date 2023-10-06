@@ -55,23 +55,9 @@ namespace NauHelper.Infrastructure.Database.EF
                         DefaultValue = "ua"
                     },
                     new RoleSettingKey {
-                        Id = 2,
-                        RoleId = (int)ExistingRoles.Student,
-                        Key = SettingKeys.FacultyId,
-                        Type = typeof(int).ToString(),
-                        DefaultValue = ""
-                    },
-                    new RoleSettingKey {
                         Id = 3,
                         RoleId = (int)ExistingRoles.Student,
                         Key = SettingKeys.GroupId,
-                        Type = typeof(int).ToString(),
-                        DefaultValue = ""
-                    },
-                    new RoleSettingKey {
-                        Id = 4,
-                        RoleId = (int)ExistingRoles.Student,
-                        Key = SettingKeys.SpecialtyId,
                         Type = typeof(int).ToString(),
                         DefaultValue = ""
                     },

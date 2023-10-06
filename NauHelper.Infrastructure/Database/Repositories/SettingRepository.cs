@@ -2,6 +2,7 @@
 using NauHelper.Core.Entities;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Infrastructure.Database.EF;
+using Telegram.Bot.Types;
 
 namespace NauHelper.Infrastructure.Database.Repositories
 {
@@ -13,6 +14,13 @@ namespace NauHelper.Infrastructure.Database.Repositories
             DataContext dataContext)
         {
             _dataContext = dataContext;
+        }
+
+        public async Task<RoleSettingKey?> GetSettingKeyAsync(string key)
+        {
+            return await _dataContext.RoleSettingKeys.FirstOrDefaultAsync(
+                settingKey => settingKey.Key == key
+            );
         }
 
         public async Task<string> GetValueByKeyAsync(long userId, string key)
@@ -30,6 +38,17 @@ namespace NauHelper.Infrastructure.Database.Repositories
                 ?? throw new InvalidOperationException("Language is null in the configuration file");
 
             return language;
+        }
+
+        public async Task<IEnumerable<Setting>> GetValuesByKeyAsync(string key)
+        {
+            var settingKey = await _dataContext.RoleSettingKeys.FirstOrDefaultAsync(settingKey =>
+                settingKey.Key == key
+            );
+
+            return await _dataContext.Settings.Where(setting =>
+                setting.RoleSettingKeyId == settingKey!.Id
+            ).ToListAsync();
         }
 
         public async Task SetValueByKeyAsync(long userId, string key, string value)

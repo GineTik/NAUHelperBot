@@ -1,5 +1,6 @@
 ﻿using NauHelper.Core.Interfaces.Localization;
 using NauHelper.Core.Interfaces.Services;
+using System.Linq;
 using Telegram.Bot;
 using Telegramper.Core.AdvancedBotClient.Extensions;
 using Telegramper.Core.Helpers.Builders;
@@ -14,10 +15,10 @@ namespace UserInterfaces.Owner.Executors.Role
     public class GiveRoleExecutor : Executor
     {
         private readonly IDialogService _dialogService;
-        private readonly IRoleService _roleService;
+        private readonly IUserService _roleService;
         private readonly ILocalizer _localizer;
 
-        public GiveRoleExecutor(IDialogService dialogService, ILocalizer localizer, IRoleService roleService)
+        public GiveRoleExecutor(IDialogService dialogService, ILocalizer localizer, IUserService roleService)
         {
             _dialogService = dialogService;
             _localizer = localizer;
@@ -66,15 +67,21 @@ namespace UserInterfaces.Owner.Executors.Role
         {
             var roleName = await _roleService.GetRoleNameByIdAsync(roleId);
 
+            var markup = new InlineKeyboardBuilder()
+                .CallbackButton(
+                    await _localizer.GetForUserAsync("Accept", userId),
+                    $"{nameof(UserAcceptRole)} {roleId} {UpdateContext.TelegramUserId}"
+                )
+                .Build();
+
+            var test = markup.InlineKeyboard
+                .Select(row => row.Select(b => b.CallbackData));
+            Console.WriteLine(String.Join("\n", test));
+
             var requestMessage = await Client.SendTextMessageAsync(
                 userId,
                 await _localizer.GetForUserAsync("WantTakeRole", userId, roleName.ToString()),
-                replyMarkup: new InlineKeyboardBuilder()
-                    .CallbackButton(
-                        await _localizer.GetForUserAsync("Accept", userId),
-                        $"{nameof(UserAcceptRole)} {roleId} {UpdateContext.TelegramUserId}"
-                    )
-                    .Build()
+                replyMarkup: markup
             );
 
             await Client.SendTextMessageAsync(

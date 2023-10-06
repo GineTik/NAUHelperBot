@@ -135,6 +135,9 @@
   <data name="Help" xml:space="preserve">
     <value>/settings - setting up interaction with the bot\n</value>
   </data>
+  <data name="MyGroupIsMissing" xml:space="preserve">
+    <value>My group is missing</value>
+  </data>
   <data name="Re-registration" xml:space="preserve">
     <value>Re-register</value>
   </data>
@@ -156,6 +159,12 @@
   </data>
   <data name="SelectSpecialty" xml:space="preserve">
     <value>Select your specialty</value>
+  </data>
+  <data name="SendRequestToCreateGroup" xml:space="preserve">
+    <value>You can send a request to create new group</value>
+  </data>
+  <data name="SendRequestToCreateGroupButton" xml:space="preserve">
+    <value>Create new group</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>⚙️ Settings</value>

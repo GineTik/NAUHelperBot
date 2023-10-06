@@ -1,50 +1,60 @@
 ﻿using NauHelper.Core.Constants;
+using NauHelper.Core.Entities;
 using NauHelper.Core.Interfaces.Localization;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Interfaces.Services;
-using NauHelper.Core.Models;
+using System.Runtime.InteropServices;
 using Telegram.Bot;
 using Telegramper.Core.AdvancedBotClient.Extensions;
 using Telegramper.Core.Helpers.Builders;
+using Telegramper.Dialog.Attributes;
+using Telegramper.Dialog.Service;
 using Telegramper.Executors.Common.Models;
 using Telegramper.Executors.QueryHandlers.Attributes.Targets;
 using Telegramper.Sessions.Interfaces;
+using UserInterfaces.Administrator.Executors.StudentGroupCoordination;
 
 namespace UserInterfaces.CommonUser.Executors
 {
+    internal class SpecialId
+    {
+        public int Value { get; set; }
+    }
+
     public class SetStudentDatasExecutor : Executor
     {
         private readonly ILocalizer _localizer;
         private readonly IFacultyRepository _facultyRepository;
         private readonly IGroupRepository _groupRepository;
         private readonly ISpecialtyRepository _specialtyRepository;
-        private readonly IUserSession _userSession;
         private readonly IStudentService _studentService;
-        private readonly IRoleService _roleService;
+        private readonly IUserService _userService;
+        private readonly IDialogService _dialogService;
+        private readonly IUserSession _userSession;
 
         public SetStudentDatasExecutor(
             ILocalizer localizer,
             IGroupRepository groupRepository,
             IFacultyRepository facultyRepository,
             ISpecialtyRepository specialtyRepository,
-            IUserSession userSession,
             IStudentService studentService,
-            IRoleService roleService)
+            IUserService userService,
+            IDialogService dialogService,
+            IUserSession userSession)
         {
             _localizer = localizer;
             _groupRepository = groupRepository;
             _facultyRepository = facultyRepository;
             _specialtyRepository = specialtyRepository;
-            _userSession = userSession;
             _studentService = studentService;
-            _roleService = roleService;
+            _userService = userService;
+            _dialogService = dialogService;
+            _userSession = userSession;
         }
 
         [TargetCallbackData]
         public async Task StartRegistration()
         {
-            await _roleService.AttachStudentRoleAsync(UpdateContext.TelegramUserId!.Value);
-
             var allFaculties = await _facultyRepository.GetAllAsync();
 
             await Client.SendTextMessageAsync(
@@ -63,11 +73,6 @@ namespace UserInterfaces.CommonUser.Executors
         [TargetCallbackData]
         public async Task ApplyFacultyAndSelectSpecialty(int facultyId)
         {
-            await _userSession.SetAsync(new StudentRegistrationInfo(), info => 
-            {
-                info.UserId = UpdateContext.TelegramUserId!.Value;
-                info.FacultyId = facultyId;
-            });
             var specialties = await _specialtyRepository.GetByFacultyIdAsync(facultyId);
 
             await Client.EditMessageTextAsync(
@@ -86,7 +91,6 @@ namespace UserInterfaces.CommonUser.Executors
         [TargetCallbackData]
         public async Task ApplySpecialtyAndSelectGroup(int specialtyId)
         {
-            await _userSession.SetAsync<StudentRegistrationInfo>(info => info.SpecialtyId = specialtyId);
             var allGroups = await _groupRepository.GetBySpecialtyIdAsync(specialtyId);
 
             await Client.EditMessageTextAsync(
@@ -98,6 +102,10 @@ namespace UserInterfaces.CommonUser.Executors
                         (g, _) => $"{nameof(ApplyGroupAndEndRegistration)} {g.Id}",
                         rowCount: 4
                      )
+                    .CallbackButton(
+                        await _localizer.GetAsync("MyGroupIsMissing"),
+                        $"{nameof(CreateRequestToAddGroup)} {specialtyId}")
+                    .EndRow()
                     .Build()
             );
         }
@@ -105,13 +113,49 @@ namespace UserInterfaces.CommonUser.Executors
         [TargetCallbackData]
         public async Task ApplyGroupAndEndRegistration(int groupId)
         {
-            await _userSession.SetAsync<StudentRegistrationInfo>(info => info.GroupId = groupId);
-            var studentInfo = await _userSession.GetAndRemoveAsync<StudentRegistrationInfo>();
-
-            await _studentService.SetStudentInfoAsync(UpdateContext.TelegramUserId!.Value, studentInfo!);
+            await _studentService.ApplyRegistrationAsync(UpdateContext.TelegramUserId!.Value, groupId);
 
             await Client.DeleteMessageAsync();
             await Client.SendTextMessageAsync(await _localizer.GetAsync("RegistrationIsEnded"));
+        }
+
+        [TargetCallbackData]
+        public async Task CreateRequestToAddGroup(int spesialtyId)
+        {
+            await Client.SendTextMessageAsync(
+                await _localizer.GetAsync("SendRequestToCreateGroup"),
+                replyMarkup: new InlineKeyboardBuilder()
+                    .CallbackButton(
+                        await _localizer.GetAsync("SendRequestToCreateGroupButton"), 
+                        $"{nameof(CreateRequestToAddGroupAprove)} {spesialtyId}")
+                    .Build());
+        }
+
+        [TargetCallbackData]
+        public async Task CreateRequestToAddGroupAprove(int specisaltyId)
+        {
+            await _userSession.SetAsync<SpecialId>(new SpecialId { Value = specisaltyId });
+            await _dialogService.StartAsync<SetStudentDatasExecutor>();
+        }
+
+        [TargetDialogStep("Введіть нову назву групи")]
+        public async Task SendMessageToModeratorForApplyCreatingGroup(string name)
+        {
+            var spesialtyId = await _userSession.GetAndRemoveAsync<SpecialId>();
+            var users = await _userService.GetUsersByRoleIdAsync((int)ExistingRoles.Owner);
+            foreach (var user in users)
+            {
+                await Client.SendTextMessageAsync(
+                    user.TelegramId,
+                    $"💥 Поступив запрос на створення групи під назвою {name}",
+                    replyMarkup: new InlineKeyboardBuilder()
+                        .CallbackButton(
+                            "Створити", 
+                            $"{nameof(GroupExecutor.AddGroupOfSpecialty)} {name} {spesialtyId!.Value}")
+                        .Build());
+            }
+            await Client.SendTextMessageAsync($"Запрос на створення групи під назвою {name} відправлено.");
+            await _dialogService.NextAsync();
         }
     }
 }

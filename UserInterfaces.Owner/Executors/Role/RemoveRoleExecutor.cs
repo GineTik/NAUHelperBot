@@ -15,9 +15,9 @@ namespace UserInterfaces.Owner.Executors.Role
     public class RemoveRoleExecutor : Executor
     {
         private readonly IDialogService _dialogService;
-        private readonly IRoleService _roleService;
+        private readonly IUserService _roleService;
 
-        public RemoveRoleExecutor(IDialogService dialogService, IRoleService roleService)
+        public RemoveRoleExecutor(IDialogService dialogService, IUserService roleService)
         {
             _dialogService = dialogService;
             _roleService = roleService;
@@ -59,7 +59,7 @@ namespace UserInterfaces.Owner.Executors.Role
         [TargetCallbackData(UserStates = "Role:Owner")]
         public async Task RemoveRoleButton(long userId, int roleId)
         {
-            var roleName = _roleService.GetRoleNameByIdAsync(roleId);
+            var roleName = await _roleService.GetRoleNameByIdAsync(roleId);
             await _roleService.RemoveAttachedRoleAsync(UpdateContext.TelegramUserId!.Value, userId, roleId);
             await Client.SendTextMessageAsync($"✅Роль {roleName} видалена.");
             await Client.DeleteMessageAsync();

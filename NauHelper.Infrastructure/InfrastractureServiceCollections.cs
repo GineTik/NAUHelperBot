@@ -17,6 +17,7 @@ namespace NauHelper.Infrastructure
             services.AddTransient<IFacultyRepository, FacultyRepository>();
             services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddTransient<ISpecialtyRepository, SpecialtyRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddSingleton<IAvailibleLanguages, AvailibleLanguages>();
             services.AddScoped<ILocalizer, ResourceLocalizer>();

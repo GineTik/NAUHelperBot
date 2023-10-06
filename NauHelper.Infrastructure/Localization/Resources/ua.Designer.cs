@@ -115,6 +115,15 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Немає моєї групи.
+        /// </summary>
+        public static string MyGroupIsMissing {
+            get {
+                return ResourceManager.GetString("MyGroupIsMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Перереєструватись.
         /// </summary>
         public static string Re_registration {
@@ -175,6 +184,24 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         public static string SelectSpecialty {
             get {
                 return ResourceManager.GetString("SelectSpecialty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ви можете подати запрос на створення нової групи.
+        /// </summary>
+        public static string SendRequestToCreateGroup {
+            get {
+                return ResourceManager.GetString("SendRequestToCreateGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Створити нову групу.
+        /// </summary>
+        public static string SendRequestToCreateGroupButton {
+            get {
+                return ResourceManager.GetString("SendRequestToCreateGroupButton", resourceCulture);
             }
         }
         
