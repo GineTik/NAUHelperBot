@@ -144,6 +144,9 @@
   <data name="RegistrationIsEnded" xml:space="preserve">
     <value>🎉🎉🎉 Дякую за реєстрацію\n\n❗Ви можете змінити свій вибір в налаштуваннях</value>
   </data>
+  <data name="RequestToCreateGroupSended" xml:space="preserve">
+    <value>Запрос на створення групи під назвою {0} відправлено.</value>
+  </data>
   <data name="RoleAccepted" xml:space="preserve">
     <value>🎉🎉🎉Вітаю ви підтвердили отримання ролі {0}🎉🎉🎉\n
 Щоб дізнатись про нові комманди ↪️ /help</value>

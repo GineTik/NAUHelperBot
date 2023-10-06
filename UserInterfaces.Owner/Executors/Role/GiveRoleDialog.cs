@@ -1,6 +1,5 @@
 ﻿using NauHelper.Core.Interfaces.Localization;
 using NauHelper.Core.Interfaces.Services;
-using System.Linq;
 using Telegram.Bot;
 using Telegramper.Core.AdvancedBotClient.Extensions;
 using Telegramper.Core.Helpers.Builders;
@@ -12,38 +11,25 @@ using Telegramper.Executors.QueryHandlers.Attributes.Validations;
 
 namespace UserInterfaces.Owner.Executors.Role
 {
-    public class GiveRoleExecutor : Executor
+    public class GiveRoleDialog : Executor
     {
         private readonly IDialogService _dialogService;
-        private readonly IUserService _roleService;
+        private readonly IUserService _userService;
         private readonly ILocalizer _localizer;
 
-        public GiveRoleExecutor(IDialogService dialogService, ILocalizer localizer, IUserService roleService)
+        public GiveRoleDialog(IDialogService dialogService, ILocalizer localizer, IUserService userService)
         {
             _dialogService = dialogService;
             _localizer = localizer;
-            _roleService = roleService;
-        }
-
-        [TargetCommand(UserStates = "Dialog:GiveRoleExecutor")]
-        public async Task Cancel()
-        {
-            await _dialogService.EndAsync();
-            await Client.SendTextMessageAsync("Скасовано");
-        }
-
-        [TargetCommand(UserStates = "Role:Owner")]
-        public async Task AttachRole()
-        {
-            await _dialogService.StartAsync<GiveRoleExecutor>();
+            _userService = userService;
         }
 
         [TargetDialogStep("Id користувача (/сancel для скасування)")]
         [RequireMessageNumber(ErrorMessage = "Ви маєте надати Id числом")]
         public async Task TakeUsername(long userId)
         {
-            var userRoles = await _roleService.GetUserRolesAsync(userId);
-            var existsRoles = await _roleService.GetExistsRolesAsync();
+            var userRoles = await _userService.GetUserRolesAsync(userId);
+            var existsRoles = await _userService.GetExistsRolesAsync();
 
             var availibleRoleToUser = existsRoles.Except(userRoles);
 
@@ -54,8 +40,7 @@ namespace UserInterfaces.Owner.Executors.Role
                     .CallbackButtonList(
                         availibleRoleToUser,
                         (role, _) => role.Name,
-                        (role, _) => $"{nameof(TakeRole)} {userId} {role.Id}"
-                    )
+                        (role, _) => $"{nameof(TakeRole)} {userId} {role.Id}")
                     .Build()
             );
 
@@ -65,18 +50,13 @@ namespace UserInterfaces.Owner.Executors.Role
         [TargetCallbackData(UserStates = "Role:Owner")]
         public async Task TakeRole(long userId, int roleId)
         {
-            var roleName = await _roleService.GetRoleNameByIdAsync(roleId);
+            var roleName = await _userService.GetRoleNameByIdAsync(roleId);
 
             var markup = new InlineKeyboardBuilder()
                 .CallbackButton(
                     await _localizer.GetForUserAsync("Accept", userId),
-                    $"{nameof(UserAcceptRole)} {roleId} {UpdateContext.TelegramUserId}"
-                )
+                    $"{nameof(AttachRole)} {roleId} {UpdateContext.TelegramUserId}")
                 .Build();
-
-            var test = markup.InlineKeyboard
-                .Select(row => row.Select(b => b.CallbackData));
-            Console.WriteLine(String.Join("\n", test));
 
             var requestMessage = await Client.SendTextMessageAsync(
                 userId,
@@ -94,14 +74,14 @@ namespace UserInterfaces.Owner.Executors.Role
         }
 
         [TargetCallbackData]
-        public async Task UserAcceptRole(int roleId, int whoGiveRoleId)
+        public async Task AttachRole(int roleId, int whoGiveRoleId)
         {
-            await _roleService.AttachRoleAsync(
+            await _userService.AttachRoleAsync(
                 whoGiveRoleId,
                 UpdateContext.TelegramUserId!.Value,
                 roleId
             );
-            var roleName = await _roleService.GetRoleNameByIdAsync(roleId);
+            var roleName = await _userService.GetRoleNameByIdAsync(roleId);
 
             await Client.DeleteMessageAsync();
             await Client.SendTextMessageAsync(await _localizer.GetAsync("RoleAccepted", roleName));

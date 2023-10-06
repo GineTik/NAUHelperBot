@@ -5,6 +5,7 @@ using Telegramper.Core.AdvancedBotClient.Extensions;
 using Telegramper.Core.Helpers.Builders;
 using Telegramper.Executors.Common.Models;
 using Telegramper.Executors.QueryHandlers.Attributes.Targets;
+using UserInterfaces.CommonUser.Executors.Dialog;
 
 namespace UserInterfaces.CommonUser.Executors
 {
@@ -29,8 +30,7 @@ namespace UserInterfaces.CommonUser.Executors
                 replyMarkup: new InlineKeyboardBuilder()
                     .CallbackButton(
                         await _localizer.GetAsync("GoStartRegistration"), 
-                        $"{nameof(SetStudentDatasExecutor.StartRegistration)}"
-                    )
+                        $"{nameof(RegistrationStudentDialog.StartRegistration)}")
                     .Build()
              );
         }

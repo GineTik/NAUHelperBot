@@ -12,35 +12,22 @@ using Telegramper.Executors.QueryHandlers.Attributes.Validations;
 
 namespace UserInterfaces.Owner.Executors.Role
 {
-    public class RemoveRoleExecutor : Executor
+    public class RemoveRoleDialog : Executor
     {
         private readonly IDialogService _dialogService;
-        private readonly IUserService _roleService;
+        private readonly IUserService _userService;
 
-        public RemoveRoleExecutor(IDialogService dialogService, IUserService roleService)
+        public RemoveRoleDialog(IDialogService dialogService, IUserService userService)
         {
             _dialogService = dialogService;
-            _roleService = roleService;
-        }
-
-        [TargetCommand(UserStates = "Dialog:RemoveRoleExecutor")]
-        public async Task Сancel()
-        {
-            await _dialogService.EndAsync();
-            await Client.SendTextMessageAsync("Скасовано");
-        }
-
-        [TargetCommand(UserStates = "Role:Owner")]
-        public async Task RemoveRole()
-        {
-            await _dialogService.StartAsync<RemoveRoleExecutor>();
+            _userService = userService;
         }
 
         [TargetDialogStep("Id користувача (/сancel для скасування)")]
         [RequireMessageNumber(ErrorMessage = "Ви маєте надати Id числом")]
         public async Task TakeUsername(long userId)
         {
-            var userRoles = await _roleService.GetUserRolesAsync(userId);
+            var userRoles = await _userService.GetUserRolesAsync(userId);
 
             await Client.SendTextMessageAsync(
                 "Виберіть роль для видалення",
@@ -59,8 +46,8 @@ namespace UserInterfaces.Owner.Executors.Role
         [TargetCallbackData(UserStates = "Role:Owner")]
         public async Task RemoveRoleButton(long userId, int roleId)
         {
-            var roleName = await _roleService.GetRoleNameByIdAsync(roleId);
-            await _roleService.RemoveAttachedRoleAsync(UpdateContext.TelegramUserId!.Value, userId, roleId);
+            var roleName = await _userService.GetRoleNameByIdAsync(roleId);
+            await _userService.RemoveAttachedRoleAsync(UpdateContext.TelegramUserId!.Value, userId, roleId);
             await Client.SendTextMessageAsync($"✅Роль {roleName} видалена.");
             await Client.DeleteMessageAsync();
         }

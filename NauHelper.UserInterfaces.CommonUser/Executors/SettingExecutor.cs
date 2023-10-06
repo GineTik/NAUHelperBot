@@ -8,6 +8,7 @@ using Telegramper.Core.Helpers.Builders;
 using Telegramper.Executors.Common.Models;
 using Telegramper.Executors.QueryHandlers.Attributes.Targets;
 using Telegramper.Executors.QueryHandlers.UserState;
+using UserInterfaces.CommonUser.Executors.Dialog;
 
 namespace UserInterfaces.CommonUser.Executors
 {
@@ -58,39 +59,14 @@ namespace UserInterfaces.CommonUser.Executors
                 replyMarkup: new InlineKeyboardBuilder()
                     .CallbackButton(
                         await _localizer.GetAsync("ChangeLanguage"), 
-                        nameof(SelectLanguageButton)
-                    ).EndRow()
+                        nameof(ChangeLanguageDialog.SelectLanguageButton))
+                    .EndRow()
                     .CallbackButton(
                         await _localizer.GetAsync("Re-registration"),
-                        $"{nameof(SetStudentDatasExecutor.StartRegistration)}"
-                    ).EndRow()
+                        $"{nameof(RegistrationStudentDialog.StartRegistration)}")
+                    .EndRow()
                     .Build()
             );
-        }
-
-        [TargetCallbackData]
-        public async Task SelectLanguageButton()
-        {
-            await Client.AnswerCallbackQueryAsync();
-
-            var markup = new InlineKeyboardBuilder().CallbackButtonList(
-                _availibleLanguages.LanguageInfos,
-                (info, _) => info.Name,
-                (info, _) => $"{nameof(ChangeLanguage)} {info.Code}"
-            ).Build();
-
-            await Client.SendTextMessageAsync(
-                 await _localizer.GetAsync("SelectLanguage"),
-                 replyMarkup: markup
-            );
-        }
-
-        [TargetCallbackData]
-        public async Task ChangeLanguage(string language)
-        {
-            await _localizationService.ChangeLanguageAsync(UpdateContext.TelegramUserId!.Value, language);
-            await Client.AnswerCallbackQueryAsync(await _localizer.GetAsync("ChangeLanguageIsSuccess"));
-            await Client.DeleteMessageAsync();
         }
     }
 }

@@ -142,6 +142,15 @@ namespace NauHelper.Infrastructure.Localization.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на The request to create a group called {0} has been sent..
+        /// </summary>
+        public static string RequestToCreateGroupSended {
+            get {
+                return ResourceManager.GetString("RequestToCreateGroupSended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 🎉🎉🎉Congratulations you have confirmed the role of {0}🎉🎉🎉
         ///\nTo learn about new commands ↪️ /help.
         /// </summary>

@@ -40,11 +40,7 @@ namespace NauHelper.Core.Services
 
             if (group == null)
             {
-                await _settingRepository.SetValueByKeyAsync(
-                    userId,
-                    SettingKeys.GroupId,
-                    ""
-                );
+                await _userService.RemoveStudentRoleAsync(userId);
                 throw new InvalidDataException($"GroupId({groupId}) in the settings is incorrect");
             }
 

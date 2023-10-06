@@ -1,27 +1,17 @@
-﻿using NauHelper.Core.Constants;
-using NauHelper.Core.Entities;
-using NauHelper.Core.Interfaces.Localization;
+﻿using NauHelper.Core.Interfaces.Localization;
 using NauHelper.Core.Interfaces.Repositories;
 using NauHelper.Core.Interfaces.Services;
-using System.Runtime.InteropServices;
 using Telegram.Bot;
 using Telegramper.Core.AdvancedBotClient.Extensions;
 using Telegramper.Core.Helpers.Builders;
-using Telegramper.Dialog.Attributes;
 using Telegramper.Dialog.Service;
 using Telegramper.Executors.Common.Models;
 using Telegramper.Executors.QueryHandlers.Attributes.Targets;
 using Telegramper.Sessions.Interfaces;
-using UserInterfaces.Administrator.Executors.StudentGroupCoordination;
 
-namespace UserInterfaces.CommonUser.Executors
+namespace UserInterfaces.CommonUser.Executors.Dialog
 {
-    internal class SpecialId
-    {
-        public int Value { get; set; }
-    }
-
-    public class SetStudentDatasExecutor : Executor
+    public class RegistrationStudentDialog : Executor
     {
         private readonly ILocalizer _localizer;
         private readonly IFacultyRepository _facultyRepository;
@@ -32,7 +22,7 @@ namespace UserInterfaces.CommonUser.Executors
         private readonly IDialogService _dialogService;
         private readonly IUserSession _userSession;
 
-        public SetStudentDatasExecutor(
+        public RegistrationStudentDialog(
             ILocalizer localizer,
             IGroupRepository groupRepository,
             IFacultyRepository facultyRepository,
@@ -82,7 +72,7 @@ namespace UserInterfaces.CommonUser.Executors
                         specialties,
                         (s, _) => s.Id.ToString(),
                         (s, _) => $"{nameof(ApplySpecialtyAndSelectGroup)} {s.Id}",
-                        rowCount: 2
+                        rowCount: 3
                      )
                     .Build()
             );
@@ -104,7 +94,7 @@ namespace UserInterfaces.CommonUser.Executors
                      )
                     .CallbackButton(
                         await _localizer.GetAsync("MyGroupIsMissing"),
-                        $"{nameof(CreateRequestToAddGroup)} {specialtyId}")
+                        $"{nameof(CreatingGroupRequestDialog.YouSureToCreateGroup)} {specialtyId}")
                     .EndRow()
                     .Build()
             );
@@ -117,45 +107,6 @@ namespace UserInterfaces.CommonUser.Executors
 
             await Client.DeleteMessageAsync();
             await Client.SendTextMessageAsync(await _localizer.GetAsync("RegistrationIsEnded"));
-        }
-
-        [TargetCallbackData]
-        public async Task CreateRequestToAddGroup(int spesialtyId)
-        {
-            await Client.SendTextMessageAsync(
-                await _localizer.GetAsync("SendRequestToCreateGroup"),
-                replyMarkup: new InlineKeyboardBuilder()
-                    .CallbackButton(
-                        await _localizer.GetAsync("SendRequestToCreateGroupButton"), 
-                        $"{nameof(CreateRequestToAddGroupAprove)} {spesialtyId}")
-                    .Build());
-        }
-
-        [TargetCallbackData]
-        public async Task CreateRequestToAddGroupAprove(int specisaltyId)
-        {
-            await _userSession.SetAsync<SpecialId>(new SpecialId { Value = specisaltyId });
-            await _dialogService.StartAsync<SetStudentDatasExecutor>();
-        }
-
-        [TargetDialogStep("Введіть нову назву групи")]
-        public async Task SendMessageToModeratorForApplyCreatingGroup(string name)
-        {
-            var spesialtyId = await _userSession.GetAndRemoveAsync<SpecialId>();
-            var users = await _userService.GetUsersByRoleIdAsync((int)ExistingRoles.Owner);
-            foreach (var user in users)
-            {
-                await Client.SendTextMessageAsync(
-                    user.TelegramId,
-                    $"💥 Поступив запрос на створення групи під назвою {name}",
-                    replyMarkup: new InlineKeyboardBuilder()
-                        .CallbackButton(
-                            "Створити", 
-                            $"{nameof(GroupExecutor.AddGroupOfSpecialty)} {name} {spesialtyId!.Value}")
-                        .Build());
-            }
-            await Client.SendTextMessageAsync($"Запрос на створення групи під назвою {name} відправлено.");
-            await _dialogService.NextAsync();
         }
     }
 }

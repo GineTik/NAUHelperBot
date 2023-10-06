@@ -72,5 +72,10 @@ namespace NauHelper.Core.Services
         {
             await _roleRepository.AttachRoleAsync(userId, (int)ExistingRoles.GroupLeader);
         }
+
+        public async Task RemoveStudentRoleAsync(long userId)
+        {
+            await _roleRepository.RemoveAttachedRoleAsync(userId, (int)ExistingRoles.Student);
+        }
     }
 }
